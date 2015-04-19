@@ -12,11 +12,10 @@ class FluTrackStreamer:
     class FluListener(tweepy.StreamListener):
             #MongoDB Client
             client = MongoClient('mongodb://localhost:27017')
-            db = client['flutrack']['tweets']
+            db = client.flutrack.tweets
 
             def on_data(self, raw_data):
                 doc = (json.loads(raw_data))
-                print doc
                 self.db.insert(doc)
                 return True
             def on_error(self, status_code):
@@ -36,6 +35,9 @@ class FluTrackStreamer:
 
         print ("Start streaming...")
         stream = tweepy.Stream(auth=auth, listener=listener)
-        data = stream.filter(track=['flu', 'chills', 'sore', 'throat',
+        keywords = ['flu', 'chills', 'sore', 'throat',
                                     'headache', 'runny', 'nose', 'vomiting',
-                                    'sneazing', 'fever','diarrhea','dry', 'cough'])
+                                    'sneazing', 'fever', 'diarrhea', 'dry', 'cough']
+
+        data = stream.filter(track=keywords)
+

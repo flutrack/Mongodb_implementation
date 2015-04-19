@@ -1,6 +1,6 @@
 __author__ = 'gsvic'
 
-from PyFlutrack.Data import FluTrackStreamer
+from PyFlutrack.DataStreamer import FluTrackStreamer
 
 def main():
     streamer = FluTrackStreamer()

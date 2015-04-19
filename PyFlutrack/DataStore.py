@@ -7,5 +7,6 @@ class Mongo():
         pass
 
     def GetData(self):
-        client = MongoClient('mongodb://localhost:27017')
-        db = client['flutrack']['tweets']
+        client = MongoClient()
+        db = client.flutrack
+        return db.tweets
