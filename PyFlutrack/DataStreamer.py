@@ -16,7 +16,8 @@ class FluTrackStreamer:
 
             def on_data(self, raw_data):
                 doc = (json.loads(raw_data))
-                self.db.insert(doc)
+                if doc['geo']:
+                    self.db.insert(doc)
                 return True
             def on_error(self, status_code):
                 print (status_code)
